@@ -26,9 +26,14 @@ class CreateCategories(ListCreateAPIView):
 
 
     def get_queryset(self):
+        """
+        API to get the queryset based on user
+        
+        """
+
         if 'all' in self.request.GET:
             queryset=Categories.objects.all()
-
+    
         if 'created_by' in self.request.GET:
             created_by = self.request.GET['created_by']
             queryset=self.queryset.filter(created_by=created_by)
