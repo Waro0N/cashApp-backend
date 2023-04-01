@@ -14,9 +14,9 @@ class CashFlow(models.Model):
     )
 
     date = models.DateField()
-    debit = models.IntegerField()
-    credit = models.IntegerField()
-    reason = models.CharField(max_length=150)
+    debit = models.IntegerField(null=True, blank=True)
+    credit = models.IntegerField(null=True, blank=True)
+    reason = models.CharField(max_length=150, null=True, blank=True)
     category_dashboard = models.CharField(max_length=20, null=True, blank=True)
 
 
