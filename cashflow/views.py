@@ -22,3 +22,11 @@ class CreateCashFlow(ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save()
+
+    def get_queryset(self):
+        if "all" in self.request.GET:
+            queryset=CashFlow.objects.all()
+        if "created_by" in self.request.GET:
+            created_by = self.request.GET['created_by']
+            queryset=CashFlow.objects.filter(created_by=created_by)
+        return queryset
