@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'profiles',
     'cashflow',
-    'categories'
+    'categories',
+    'analytics'
 ]
 
 MIDDLEWARE = [
