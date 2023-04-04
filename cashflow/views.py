@@ -29,4 +29,6 @@ class CreateCashFlow(ListCreateAPIView):
         if "created_by" in self.request.GET:
             created_by = self.request.GET['created_by']
             queryset=CashFlow.objects.filter(created_by=created_by)
+        if 'ordering' in self.request.GET and self.request.GET['ordering'] == '-id':
+            queryset = queryset.order_by('-id')
         return queryset
