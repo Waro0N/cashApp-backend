@@ -7,16 +7,24 @@ from rest_framework.response import Response
 from cashflow.models import CashFlow
 from .serializers import AnalyticsSerializer
 # Create your views here.
+
+
 class Analytics(ListAPIView):
-    queryset=CashFlow.objects.all()
+    queryset = CashFlow.objects.all()
     serializer_class = AnalyticsSerializer
 
     def get(self, request, *args, **kwargs):
-        category_list=[]
-        expense=[]
         queryset = self.filter_queryset(self.get_queryset())
-        # print(list(queryset))
         serializer = self.get_serializer(queryset, many=True)
         data = serializer.data
-        
-        return Response(data)
+        api_data = {}
+        for i in data:
+            category_item = i['category_dashboard']
+            debit_item = i['debit']
+            if category_item in api_data:
+                api_data[category_item] += debit_item
+            else:
+                api_data[category_item] = debit_item
+        result = [{'category_dashboard': category, 'debit': total}
+              for category, total in api_data.items()]
+        return Response(result)
