@@ -19,6 +19,7 @@ class Analytics(ListAPIView):
         data = serializer.data
         api_data = {}
         for i in data:
+            print(api_data)
             category_item = i['category_dashboard']
             debit_item = i['debit']
             if category_item in api_data:

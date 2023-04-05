@@ -1,12 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from categories.models import Categories
-
+from profiles.models import CustomUser
 
 # Create your models here.
 class CashFlow(models.Model):
     created_by = models.ForeignKey(
-        User,
+        CustomUser,
         null=True,
         blank=True,
         related_name='cash_user',

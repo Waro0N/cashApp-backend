@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from profiles.models import CustomUser
 # Create your models here.
 class Categories(models.Model):
     created_by = models.ForeignKey(
-        User,
+        CustomUser,
         null=True,
         blank=True,
         related_name='user_name',

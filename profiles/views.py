@@ -8,10 +8,12 @@ from .serializer import UserSerializer
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.decorators import api_view
+from .models import CustomUser
 
 # Create your views here.
 
 class signUpUser(ListCreateAPIView):
+    queryset=CustomUser.objects.all()
     serializer_class = UserSerializer
 
     def signup_user(self, request):
