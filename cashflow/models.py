@@ -12,7 +12,6 @@ class CashFlow(models.Model):
         related_name='cash_user',
         on_delete=models.CASCADE
     )
-
     date = models.DateField()
     debit = models.IntegerField(null=True, blank=True)
     credit = models.IntegerField(null=True, blank=True)

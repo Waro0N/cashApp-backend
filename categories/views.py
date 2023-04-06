@@ -28,7 +28,6 @@ class CreateCategories(ListCreateAPIView):
     def get_queryset(self):
         """
         API to get the queryset based on user
-        
         """
 
         if 'all' in self.request.GET:
