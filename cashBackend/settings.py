@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'profiles',
     'cashflow',
     'categories',
-    'analytics'
+    'analytics',
+    'calenderdetails'
 ]
 
 MIDDLEWARE = [
