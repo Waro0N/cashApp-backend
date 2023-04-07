@@ -3,6 +3,7 @@ from rest_framework.generics import (
     ListAPIView,
     ListCreateAPIView
 )
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .serializer import UserSerializer
 from rest_framework.views import APIView
@@ -15,6 +16,4 @@ from .models import CustomUser
 class signUpUser(ListCreateAPIView):
     queryset=CustomUser.objects.all()
     serializer_class = UserSerializer
-
-    def signup_user(self, request):
-        pass
+    permission_classes = (AllowAny,)
