@@ -16,9 +16,13 @@ class Analytics(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
+        created_by = self.request.GET['created_by']
+        queryset = queryset.filter(created_by=created_by)
         serializer = self.get_serializer(queryset, many=True)
         data = serializer.data
         api_data = {}
+        created_by =self.request.GET.get('created_by') 
+        
         for i in data:
             category_item = i['category_dashboard']
             debit_item = i['debit']

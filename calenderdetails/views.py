@@ -20,25 +20,23 @@ class CalenderDetails(ListAPIView):
         serializer = self.get_serializer(queryset, many=True)
         data=serializer.data
         comp_data={}
-        temp1 = 'Debit"'
+        credit_data={}
         for i in data:
             date = i['date']
             debit_item= i['debit']
-            
             credit_item = i['credit']
-            # comp_data['start'] = date
             if date in comp_data:
                 comp_data[date] += debit_item
             else:
                 comp_data[date] = debit_item
-            
-            # if debit_item == 0:
-            #     if date in comp_data:
-            #         comp_data[date] += credit_item
-            #     else:
-            #         comp_data[date] = credit_item     
-
-                
+        
+            if debit_item == 0:
+                if date in credit_data:
+                    credit_data[date] += credit_item
+                else:
+                    credit_data[date] = credit_item
+        print(comp_data)
+        print(credit_data)
         results = [{'start': cal_date , 'title': 'Debit: ' + str(total)} for cal_date, total in comp_data.items() ]
 
         return Response(results)
