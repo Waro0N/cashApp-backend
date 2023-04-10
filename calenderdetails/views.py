@@ -6,6 +6,7 @@ from rest_framework.generics import (
 from cashflow.models import CashFlow
 from .serializer import CalenderSerializer
 from rest_framework.response import Response
+from django.db.models.functions import ExtractMonth
 # Create your views here.
 class CalenderDetails(ListAPIView):
     queryset = CashFlow.objects.all()
@@ -17,6 +18,9 @@ class CalenderDetails(ListAPIView):
         if 'created_by' in self.request.GET:
             created_by = self.request.GET['created_by']
             queryset=queryset.filter(created_by=created_by)
+        if 'month_filter' in self.request.GET:
+            month_filter = self.request.GET['month_filter']
+            queryset = queryset.annotate(month=ExtractMonth('date')).filter(month=month_filter)
 
             for i in queryset:
                 if i.debit > 0:
