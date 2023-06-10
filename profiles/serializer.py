@@ -14,3 +14,8 @@ class UserSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
         )
         return user
+    
+class loggedUser(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'username', 'email']
